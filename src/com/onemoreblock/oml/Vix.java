@@ -96,7 +96,7 @@ public class Vix extends JavaPlugin {
             if (!isNameValid(player.getWorld().getName())) {
                 worldman.deleteWorld(player.getWorld().getName());
             } else {
-                worldman.removeWorldFromConfig(player.getWorld().getName());
+                worldman.unloadWorld(player.getWorld());
             }
         }
     }
@@ -318,8 +318,7 @@ public class Vix extends JavaPlugin {
                             "A level with that name does not exist!");
                 }
             } else {
-                Player player = (Player) sender; // Assume you guys won't run
-                // from console. <3
+                Player player = (Player) sender;
                 if (isPlayerInHub(player)) {
                     sendMessage(sender, "Deletes a level/draft.");
                     sendMessage(sender, "�eUsage: �3/delete �7<Level Name>");

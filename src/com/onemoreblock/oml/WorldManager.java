@@ -9,6 +9,8 @@ import org.bukkit.plugin.java.JavaPlugin;
 import java.io.*;
 
 public class WorldManager extends JavaPlugin {
+    private World emptyWorld;
+
     public static void copyFolder(File src, File dest) throws IOException {
 
         if (src.isDirectory()) {
@@ -99,8 +101,11 @@ public class WorldManager extends JavaPlugin {
         }
     }
 
-    public void removeWorldFromConfig(String name) {
-        //TODO getServer().unloadWorld(name, true);
+    public void unloadWorld(World world) {
+        this.emptyWorld = Bukkit.getWorld("");
+        if (!world.equals(null)) {
+            Bukkit.getServer().unloadWorld(world, true);
+        }
     }
 
     public Location getSpawnLocation(String name) {

@@ -31,7 +31,7 @@ public class EventManager implements Listener {
             if (Vix.isNameValid(world.getName()) == false) {
                 Vix.worldman.deleteWorld(world.getName());
             } else {
-                Vix.worldman.removeWorldFromConfig(world.getName());
+                Vix.worldman.unloadWorld(world);
             }
         }
     }
@@ -50,7 +50,7 @@ public class EventManager implements Listener {
             if (Vix.isNameValid(world.getName()) == false) {
                 Vix.worldman.deleteWorld(world.getName());
             } else {
-                Vix.worldman.removeWorldFromConfig(world.getName());
+                Vix.worldman.unloadWorld(world);
             }
         }
     }

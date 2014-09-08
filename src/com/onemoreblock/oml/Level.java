@@ -23,7 +23,7 @@ public class Level {
         world.setBiome(0, 0, org.bukkit.block.Biome.PLAINS);
         world.setDifficulty(org.bukkit.Difficulty.EASY);
         world.setPVP(false);
-        Vix.worldman.removeWorldFromConfig(name);
+        Vix.worldman.unloadWorld(world);
         name = levelname;
         designer = leveldesigner.getName();
 
