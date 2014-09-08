@@ -1,0 +1,11 @@
+<component name="ArtifactManager">
+  <artifact type="jar" build-on-make="true" name="oml">
+    <output-path>$PROJECT_DIR$/out/artifacts/oml</output-path>
+    <root id="archive" name="oml.jar">
+      <element id="library" level="project" name="bukkit-1.7.9-R0.2" />
+      <element id="library" level="project" name="sqlite-jdbc-3.7.2" />
+      <element id="library" level="project" name="Vault-1.4.1" />
+      <element id="module-output" name="OneMoreLevel" />
+    </root>
+  </artifact>
+</component>
