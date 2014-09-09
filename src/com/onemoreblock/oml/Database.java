@@ -1,12 +1,14 @@
 package com.onemoreblock.oml;
 
+import org.bukkit.Bukkit;
+
 import java.sql.*;
 
 /**
  * Created by epowerj on 9/9/14.
  */
 public class Database {
-    String ip = "localhost";
+    String ip = "192.198.207.18";
     String user = "mc-191";
     String password = "c7b7af4356";
 
@@ -21,13 +23,27 @@ public class Database {
             return;
         }
 
+        Bukkit.getLogger().info("MySQL JDBC Driver Registered!");
+
         try {
-            connection = DriverManager.getConnection("jdbc:mysql://" + ip + ":3306/", user, password);
-            db = connection.createStatement();
+            String address = "jdbc:mysql://" + ip + ":3306";
+            Bukkit.getLogger().info("Connecting to: " + address);
+            connection = DriverManager.getConnection(address, user, password);
         } catch (SQLException e) {
-            System.out.println("Connection Failed! Check output console");
+            Bukkit.getLogger().info("Connection Failed! Check output console");
             e.printStackTrace();
             return;
+        }
+
+        if (connection != null) {
+            Bukkit.getLogger().info("You made it, take control your database now!");
+            try {
+                db = connection.createStatement();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        } else {
+            Bukkit.getLogger().info("Failed to make connection!");
         }
     }
 
