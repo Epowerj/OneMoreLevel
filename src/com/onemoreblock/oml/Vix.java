@@ -1,6 +1,8 @@
 package com.onemoreblock.oml;
 
 import net.milkbowl.vault.permission.Permission;
+import org.bukkit.GameMode;
+import org.bukkit.World;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -13,6 +15,8 @@ import org.bukkit.plugin.java.JavaPlugin;
 public class Vix extends JavaPlugin {
     private LevelManager lvlman = new LevelManager();
     public static Permission permission = null;
+
+    public final String cc = ""; //color code
 
     @Override
     public void onEnable() {
@@ -32,19 +36,32 @@ public class Vix extends JavaPlugin {
         return (permission != null);
     }
 
-
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
-        if (cmd.getName().equalsIgnoreCase("create")) {
-            sender.sendMessage("Creating...");
+        if (sender instanceof Player) {
             Player player = (Player) sender;
-            player.teleport(lvlman.create(args[0], (Player) sender).getSpawnLocation());
-            return true;
+
+            if (cmd.getName().equalsIgnoreCase("create")) {
+                createCommand(player, args[0]);
+                return true;
+            }
+        } else {
+            sender.sendMessage(cc + "This command cannot be used from the console");
         }
-        return false;
+        return true;
+    }
+
+    private void createCommand(Player player, String name) {
+        //TODO check if already exists
+        player.sendMessage("Creating " + name);
+        World world = lvlman.create(name, player);
+        player.teleport(world.getSpawnLocation());
+        player.setBedSpawnLocation(world.getSpawnLocation());
+        permission.playerAdd(player, "bukkit.command.gamemode");
+        player.setGameMode(GameMode.CREATIVE);
     }
 
     public void log(String message) {
-        getLogger().info(message);
+        getLogger().info(cc + message);
     }
 }

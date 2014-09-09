@@ -14,6 +14,7 @@ public class LevelManager {
         wc.generator("VoidGenerator");
         wc.generateStructures(false);
         wc.environment(org.bukkit.World.Environment.NORMAL);
+        //TODO register level and creator to database
         return wc.createWorld();
     }
 }
