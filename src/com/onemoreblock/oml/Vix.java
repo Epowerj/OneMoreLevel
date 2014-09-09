@@ -77,6 +77,7 @@ public class Vix extends JavaPlugin {
 
     private void exitCommand(Player player) {
         permission.playerRemove(player, perms);
+        player.getInventory().clear();
         player.setGameMode(GameMode.ADVENTURE);
         player.teleport(Bukkit.getWorld("world").getSpawnLocation());
     }

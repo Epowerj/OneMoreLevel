@@ -6,9 +6,9 @@ import java.sql.*;
  * Created by epowerj on 9/9/14.
  */
 public class Database {
-    String ip = "85.10.205.173";
-    String user = "epowerj";
-    String password = "health20";
+    String ip = "localhost";
+    String user = "mc-191";
+    String password = "c7b7af4356";
 
     Connection connection = null;
     Statement db = null;
