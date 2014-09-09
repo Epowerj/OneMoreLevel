@@ -14,12 +14,14 @@ import org.bukkit.plugin.java.JavaPlugin;
  */
 public class Vix extends JavaPlugin {
     private LevelManager lvlman = new LevelManager();
+    private EventManager eventman = new EventManager();
     public static Permission permission = null;
 
     public final String cc = ""; //color code
 
     @Override
     public void onEnable() {
+        getServer().getPluginManager().registerEvents(eventman, this);
         setupPermissions();
     }
 
