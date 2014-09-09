@@ -69,4 +69,23 @@ public class Database {
         return false;
     }
 
+    public boolean isDesigner(String name, String creator) {
+        ResultSet rs;
+
+        try {
+            rs = db.executeQuery("select creator from levels where name = '" + name + "'");
+            while (rs.next()) {
+                String des = rs.getString("creator");
+                if (des.equals(creator)) {
+                    return true;
+                }
+            }
+            return false;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+
 }
