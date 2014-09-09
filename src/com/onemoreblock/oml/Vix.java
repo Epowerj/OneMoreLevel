@@ -15,6 +15,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 public class Vix extends JavaPlugin {
     private LevelManager lvlman = new LevelManager();
     private EventManager eventman = new EventManager();
+    private Database db = new Database();
     public static Permission permission = null;
 
     public final String cc = ""; //color code
