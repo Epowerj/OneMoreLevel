@@ -1,6 +1,7 @@
 package com.onemoreblock.oml;
 
 import net.milkbowl.vault.permission.Permission;
+import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.World;
 import org.bukkit.command.Command;
@@ -19,6 +20,7 @@ public class Vix extends JavaPlugin {
     public static Permission permission = null;
 
     public final String cc = ""; //color code
+    public final String perms = "bukkit.command.gamemode";
 
     @Override
     public void onEnable() {
@@ -49,6 +51,11 @@ public class Vix extends JavaPlugin {
                 createCommand(player, args[0]);
                 return true;
             }
+
+            if (cmd.getName().equalsIgnoreCase("exit")) {
+                exitCommand(player);
+                return true;
+            }
         } else {
             sender.sendMessage(cc + "This command cannot be used from the console");
         }
@@ -61,8 +68,18 @@ public class Vix extends JavaPlugin {
         World world = lvlman.create(name, player);
         player.teleport(world.getSpawnLocation());
         player.setBedSpawnLocation(world.getSpawnLocation());
-        permission.playerAdd(player, "bukkit.command.gamemode");
+        permission.playerAdd(player, perms);
         player.setGameMode(GameMode.CREATIVE);
+    }
+
+    private void exitCommand(Player player) {
+        permission.playerRemove(player, perms);
+        player.setGameMode(GameMode.ADVENTURE);
+        player.teleport(Bukkit.getWorld("world").getSpawnLocation());
+    }
+
+    public boolean isPlayerEditing(Player player) {
+        return (player.getWorld().getName() != "world");
     }
 
     public void log(String message) {
