@@ -24,6 +24,7 @@ public class Vix extends JavaPlugin {
     public void onEnable() {
         getServer().getPluginManager().registerEvents(eventman, this);
         setupPermissions();
+        db.load();
     }
 
     @Override
