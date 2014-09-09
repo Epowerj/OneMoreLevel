@@ -16,7 +16,7 @@ public class LevelManager {
         wc.generator("VoidGenerator");
         wc.generateStructures(false);
         wc.environment(org.bukkit.World.Environment.NORMAL);
-        //TODO register level and creator to database
+        Vix.getDB().register(name, creator.getDisplayName());
         World world = wc.createWorld();
         makeBlock(world);
         return world;

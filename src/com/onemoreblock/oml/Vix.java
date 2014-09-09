@@ -15,7 +15,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 public class Vix extends JavaPlugin {
     private LevelManager lvlman = new LevelManager();
     private EventManager eventman = new EventManager();
-    private Database db = new Database();
+    private static Database db = new Database();
     public static Permission permission = null;
 
     public final String cc = ""; //color code
@@ -67,5 +67,9 @@ public class Vix extends JavaPlugin {
 
     public void log(String message) {
         getLogger().info(cc + message);
+    }
+
+    public static Database getDB() {
+        return db;
     }
 }
