@@ -20,7 +20,7 @@ public class Vix extends JavaPlugin {
     public static Permission permission = null;
 
     public final String cc = ""; //color code
-    public final String perms = "bukkit.command.gamemode";
+    public static final String perms = "bukkit.command.gamemode";
 
     @Override
     public void onEnable() {
@@ -75,7 +75,7 @@ public class Vix extends JavaPlugin {
         }
     }
 
-    private void exitCommand(Player player) {
+    public static void exitCommand(Player player) {
         permission.playerRemove(player, perms);
         player.getInventory().clear();
         player.setGameMode(GameMode.ADVENTURE);
