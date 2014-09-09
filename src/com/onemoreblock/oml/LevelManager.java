@@ -1,5 +1,7 @@
 package com.onemoreblock.oml;
 
+import org.bukkit.World;
+import org.bukkit.WorldCreator;
 import org.bukkit.entity.Player;
 
 /**
@@ -7,7 +9,11 @@ import org.bukkit.entity.Player;
  */
 public class LevelManager {
 
-    public void create(String name, Player creator) {
-        
+    public World create(String name, Player creator) {
+        WorldCreator wc = new WorldCreator(name);
+        wc.generator("VoidGenerator");
+        wc.generateStructures(false);
+        wc.environment(org.bukkit.World.Environment.NORMAL);
+        return wc.createWorld();
     }
 }
