@@ -22,33 +22,8 @@ commands:
       usage: /delete <name>
       permission: vix.basic
       permission-message: You don't have <permission>
-   confirm:
-      description: Confirm a command
-      usage: /confirm
-      permission: vix.basic
-      permission-message: You don't have <permission>
-   setleavepoint:
-      description: Set the spawn
-      usage: /setleavepoint
-      permission: vix.admin
-      permission-message: You don't have <permission>
-   leave:
+   exit:
       description: Leave the level
-      usage: /leave
+      usage: /exit
       permission: vix.basic
-      permission-message: You don't have <permission>
-   setstart:
-      description: Set the beginning of your level
-      usage: /setstart
-      permission: vix.basic
-      permission-message: You don't have <permission>
-   publish:
-      description: Publish your level
-      usage: /publish <name>
-      permission: vix.basic
-      permission-message: You don't have <permission>
-   reset:
-      description: resets
-      usage: /reset
-      permission: vix.admin
       permission-message: You don't have <permission>
