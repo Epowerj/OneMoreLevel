@@ -1,6 +1,6 @@
 name: Vix
 main: com.onemoreblock.oml.Vix
-version: 0.1.4
+version: 0.2.1
 commands:
    create:
       description: Create level
