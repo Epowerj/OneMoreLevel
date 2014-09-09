@@ -19,7 +19,7 @@ public class EventManager implements Listener {
         if ((event.getEntity() instanceof Player)) {
             Player player = (Player) event.getEntity();
             event.setCancelled(true);
-            player.setFoodLevel(6);
+            player.setFoodLevel(12);
         }
     }
 
