@@ -63,13 +63,16 @@ public class Vix extends JavaPlugin {
     }
 
     private void createCommand(Player player, String name) {
-        //TODO check if already exists
         player.sendMessage("Creating " + name);
         World world = lvlman.create(name, player);
-        player.teleport(world.getSpawnLocation());
-        player.setBedSpawnLocation(world.getSpawnLocation());
-        permission.playerAdd(player, perms);
-        player.setGameMode(GameMode.CREATIVE);
+        if (world != null) {
+            player.teleport(world.getSpawnLocation());
+            player.setBedSpawnLocation(world.getSpawnLocation());
+            permission.playerAdd(player, perms);
+            player.setGameMode(GameMode.CREATIVE);
+        } else {
+            player.sendMessage(cc + "The world " + name + " already exists!");
+        }
     }
 
     private void exitCommand(Player player) {

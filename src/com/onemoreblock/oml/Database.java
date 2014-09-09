@@ -1,9 +1,6 @@
 package com.onemoreblock.oml;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 
 /**
  * Created by epowerj on 9/9/14.
@@ -58,6 +55,18 @@ public class Database {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    public boolean levelExists(String name) {
+        ResultSet rs;
+
+        try {
+            rs = db.executeQuery("select name from levels where name = '" + name + "'");
+            return rs.next();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
     }
 
 }
