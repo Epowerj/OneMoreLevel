@@ -65,7 +65,7 @@ public class WorldManager extends JavaPlugin {
 
     public World cloneWorld(String name) {
         Integer i = 0;
-        while ((Vix.worldman.worldExists(name + "@" + i.toString())) == true) {
+        while ((Vix.getWorldManager().worldExists(name + "@" + i.toString())) == true) {
             i++;
         }
         String clonename = name + "@" + i.toString();
@@ -86,7 +86,6 @@ public class WorldManager extends JavaPlugin {
         return world;
     }
 
-    //TODO unloadworld could be (name, true)?
     public void deleteWorld(String name) {
         //getServer().unloadWorld(name, true);
         File world_files = new File(name + "/");

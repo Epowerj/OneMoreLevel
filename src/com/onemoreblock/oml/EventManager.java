@@ -27,11 +27,11 @@ public class EventManager implements Listener {
         Inventory invent = player.getInventory();
         invent.clear();
         World world = player.getLocation().getWorld();
-        if (Vix.worldman.areWorldsEqual(world.getName(), "world")) {
+        if (Vix.getWorldManager().areWorldsEqual(world.getName(), "world")) {
             if (Vix.isNameValid(world.getName()) == false) {
-                Vix.worldman.deleteWorld(world.getName());
+                Vix.getWorldManager().deleteWorld(world.getName());
             } else {
-                Vix.worldman.unloadWorld(world);
+                Vix.getWorldManager().unloadWorld(world);
             }
         }
     }
@@ -46,11 +46,11 @@ public class EventManager implements Listener {
         Inventory invent = player.getInventory();
         invent.clear();
         World world = player.getLocation().getWorld();
-        if (Vix.worldman.areWorldsEqual(world.getName(), "world")) {
+        if (Vix.getWorldManager().areWorldsEqual(world.getName(), "world")) {
             if (Vix.isNameValid(world.getName()) == false) {
-                Vix.worldman.deleteWorld(world.getName());
+                Vix.getWorldManager().deleteWorld(world.getName());
             } else {
-                Vix.worldman.unloadWorld(world);
+                Vix.getWorldManager().unloadWorld(world);
             }
         }
     }

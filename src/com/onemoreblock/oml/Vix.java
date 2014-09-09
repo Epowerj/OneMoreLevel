@@ -32,13 +32,31 @@ import java.util.logging.Logger;
 
 public class Vix extends JavaPlugin {
 
-    static public EventManager eventman;
-    static public DatabaseManager dbman;
-    static public WorldManager worldman;
-    public static Permission perms = null;
-    static Plugin plugin;
-    static Logger log;
-    static Location leave;
+    static private EventManager eventman;
+    static private DatabaseManager dbman;
+    static private WorldManager worldman;
+    static private Permission perms = null;
+    static private Plugin plugin;
+    static private Logger log;
+    static private Location leave;
+
+    public static void exit(Player player) {
+        // TODO co-op
+        Vix.getPerms()
+                .playerRemove((String) null, player.getName(), "Vix.edit");
+        Vix.getPerms().playerRemove((String) null, player.getName(),
+                "voxelsniper.litesniper");
+        Inventory invent = player.getInventory();
+        invent.clear();
+        String defaultworld = "world";
+        if (!worldman.areWorldsEqual(player.getWorld().getName(), defaultworld)) {
+            if (!isNameValid(player.getWorld().getName())) {
+                worldman.deleteWorld(player.getWorld().getName());
+            } else {
+                worldman.unloadWorld(player.getWorld());
+            }
+        }
+    }
 
     public static WorldManager getWorldManager() {
         return worldman;
@@ -82,26 +100,6 @@ public class Vix extends JavaPlugin {
     public static void sendMessage(CommandSender sender, String string) {
         sender.sendMessage(string);
     }
-
-    public static void exit(Player player) {
-        // TODO co-op
-        Vix.getPerms()
-                .playerRemove((String) null, player.getName(), "Vix.edit");
-        Vix.getPerms().playerRemove((String) null, player.getName(),
-                "voxelsniper.litesniper");
-        Inventory invent = player.getInventory();
-        invent.clear();
-        String defaultworld = "world";
-        if (!worldman.areWorldsEqual(player.getWorld().getName(), defaultworld)) {
-            if (!isNameValid(player.getWorld().getName())) {
-                worldman.deleteWorld(player.getWorld().getName());
-            } else {
-                worldman.unloadWorld(player.getWorld());
-            }
-        }
-    }
-
-    // ---End Getters---
 
     @Override
     public void onEnable() {

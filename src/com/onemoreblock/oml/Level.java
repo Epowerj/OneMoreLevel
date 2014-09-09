@@ -14,7 +14,7 @@ public class Level {
     boolean published = false;
 
     public Level(String levelname, Player leveldesigner) {
-        World world = Vix.worldman.createWorld(levelname);
+        World world = Vix.getWorldManager().createWorld(levelname);
         world.setAmbientSpawnLimit(0);
         world.setAnimalSpawnLimit(0);
         world.setAutoSave(true);
@@ -23,7 +23,7 @@ public class Level {
         world.setBiome(0, 0, org.bukkit.block.Biome.PLAINS);
         world.setDifficulty(org.bukkit.Difficulty.EASY);
         world.setPVP(false);
-        Vix.worldman.unloadWorld(world);
+        Vix.getWorldManager().unloadWorld(world);
         name = levelname;
         designer = leveldesigner.getName();
 
@@ -34,15 +34,15 @@ public class Level {
     }
 
     public Level(String s) {
-        if (isNameValid(s) && Vix.dbman.levelExists(s)) {
+        if (isNameValid(s) && Vix.getDBManager().levelExists(s)) {
             name = s;
-            designer = Vix.dbman.getDesigner(s);
-            published = Vix.dbman.isLevelPublished(s);
+            designer = Vix.getDBManager().getDesigner(s);
+            published = Vix.getDBManager().isLevelPublished(s);
         }
     }
 
     public World createClone() {
-        return Vix.worldman.cloneWorld(name);
+        return Vix.getWorldManager().cloneWorld(name);
 
 		/*Integer i = 0;
         while ((Vix.worldman.worldExists(name + "@" + i.toString())) == true) {
@@ -94,9 +94,9 @@ public class Level {
     }
 
     public World getWorld() {
-        if (Vix.dbman.levelExists(name)) {
-            Vix.worldman.createWorld(name);
-            World world = Vix.worldman.getWorld(name);
+        if (Vix.getDBManager().levelExists(name)) {
+            Vix.getWorldManager().createWorld(name);
+            World world = Vix.getWorldManager().getWorld(name);
             world.setBiome(0, 0, org.bukkit.block.Biome.PLAINS);
             world.setDifficulty(org.bukkit.Difficulty.EASY);
             world.setPVP(false);
