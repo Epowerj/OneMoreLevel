@@ -31,7 +31,7 @@ public class Vix extends JavaPlugin {
 
     @Override
     public void onDisable() {
-
+        db.close();
     }
 
     private boolean setupPermissions() {
@@ -53,7 +53,7 @@ public class Vix extends JavaPlugin {
             }
 
             if (cmd.getName().equalsIgnoreCase("edit")) {
-                editCommand(player);
+                editCommand(player, args[0]);
                 return true;
             }
 
@@ -80,8 +80,17 @@ public class Vix extends JavaPlugin {
         }
     }
 
-    private void editCommand(Player player) {
+    private void editCommand(Player player, String name) {
+        if (db.levelExists(name) && db.isDesigner(name, player.getDisplayName())) {
+            World world = Bukkit.getWorld(name);
 
+            player.teleport(world.getSpawnLocation());
+            player.setBedSpawnLocation(world.getSpawnLocation());
+            permission.playerAdd(player, perms);
+            player.setGameMode(GameMode.CREATIVE);
+        } else {
+            player.sendMessage(cc + "You are either not the creator of this level or it doesn't exist");
+        }
     }
 
     public static void exitCommand(Player player) {
