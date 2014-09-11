@@ -52,6 +52,11 @@ public class Vix extends JavaPlugin {
                 return true;
             }
 
+            if (cmd.getName().equalsIgnoreCase("edit")) {
+                editCommand(player);
+                return true;
+            }
+
             if (cmd.getName().equalsIgnoreCase("exit")) {
                 exitCommand(player);
                 return true;
@@ -73,6 +78,10 @@ public class Vix extends JavaPlugin {
         } else {
             player.sendMessage(cc + "The world " + name + " already exists!");
         }
+    }
+
+    private void editCommand(Player player) {
+
     }
 
     public static void exitCommand(Player player) {
