@@ -72,7 +72,6 @@ public class Vix extends JavaPlugin {
         World world = lvlman.create(name, player);
         if (world != null) {
             player.teleport(world.getSpawnLocation());
-            player.setBedSpawnLocation(world.getSpawnLocation());
             permission.playerAdd(player, perms);
             player.setGameMode(GameMode.CREATIVE);
         } else {
@@ -85,7 +84,6 @@ public class Vix extends JavaPlugin {
             World world = Bukkit.getWorld(name);
 
             player.teleport(world.getSpawnLocation());
-            player.setBedSpawnLocation(world.getSpawnLocation());
             permission.playerAdd(player, perms);
             player.setGameMode(GameMode.CREATIVE);
         } else {
