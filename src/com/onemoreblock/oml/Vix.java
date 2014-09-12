@@ -14,7 +14,7 @@ import org.bukkit.plugin.java.JavaPlugin;
  * Created by epowerj on 9/8/14.
  */
 public class Vix extends JavaPlugin {
-    private LevelManager lvlman = new LevelManager();
+    private static LevelManager lvlman = new LevelManager();
     private EventManager eventman = new EventManager();
     private static Database db = new Database();
     public static Permission permission = null;
@@ -85,7 +85,7 @@ public class Vix extends JavaPlugin {
 
     private void editCommand(Player player, String name) {
         if (db.levelExists(name) && db.isDesigner(name, player.getDisplayName())) {
-            World world = Bukkit.getWorld(name);
+            World world = lvlman.getWorld(name);
 
             player.teleport(world.getSpawnLocation());
             permission.playerAdd(player, perms);
@@ -99,6 +99,7 @@ public class Vix extends JavaPlugin {
         permission.playerRemove(player, perms);
         player.getInventory().clear();
         player.setGameMode(GameMode.ADVENTURE);
+        lvlman.unloadWorld(player.getWorld());
         player.teleport(Bukkit.getWorld("world").getSpawnLocation());
     }
 

@@ -1,9 +1,6 @@
 package com.onemoreblock.oml;
 
-import org.bukkit.Location;
-import org.bukkit.Material;
-import org.bukkit.World;
-import org.bukkit.WorldCreator;
+import org.bukkit.*;
 import org.bukkit.entity.Player;
 
 /**
@@ -25,6 +22,15 @@ public class LevelManager {
         } else {
             return null;
         }
+    }
+
+    public World getWorld(String name) {
+        World world = Bukkit.getWorld(name);
+        return Bukkit.getServer().createWorld(new WorldCreator("WorldName"));
+    }
+
+    public void unloadWorld(World world) {
+        Bukkit.getServer().unloadWorld(world, true);
     }
 
     private void makeBlock(World world) {
