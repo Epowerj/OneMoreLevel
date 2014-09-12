@@ -26,7 +26,11 @@ public class LevelManager {
 
     public World getWorld(String name) {
         World world = Bukkit.getWorld(name);
-        return Bukkit.getServer().createWorld(new WorldCreator("WorldName"));
+        if (levelExists(name) && world == null) {
+            return Bukkit.getServer().createWorld(new WorldCreator("WorldName"));
+        } else {
+            return world;
+        }
     }
 
     public void unloadWorld(World world) {

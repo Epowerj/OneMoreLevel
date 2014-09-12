@@ -45,8 +45,9 @@ public class Vix extends JavaPlugin {
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
         if (sender instanceof Player) {
+            Player player = (Player) sender;
             if (args.length > 0) {
-                Player player = (Player) sender;
+
 
                 if (cmd.getName().equalsIgnoreCase("create")) {
                     createCommand(player, args[0]);
@@ -57,13 +58,13 @@ public class Vix extends JavaPlugin {
                     editCommand(player, args[0]);
                     return true;
                 }
-
-                if (cmd.getName().equalsIgnoreCase("exit")) {
-                    exitCommand(player);
-                    return true;
-                }
             } else {
                 return false;
+            }
+
+            if (cmd.getName().equalsIgnoreCase("exit")) {
+                exitCommand(player);
+                return true;
             }
         } else {
             sender.sendMessage(cc + "This command cannot be used from the console");
