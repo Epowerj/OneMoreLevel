@@ -7,3 +7,4 @@ TODO:
 > remove mobs
 > stop creeper explosions
 > stop time
+> add /setstart
