@@ -62,6 +62,11 @@ public class Vix extends JavaPlugin {
                     editCommand(player, args[0]);
                     return true;
                 }
+
+                if (cmd.getName().equalsIgnoreCase("play")) {
+                    editCommand(player, args[0]);
+                    return true;
+                }
             } else {
                 return false;
             }
@@ -81,6 +86,12 @@ public class Vix extends JavaPlugin {
         } else {
             player.sendMessage(cc + "The world " + name + " already exists!");
         }
+    }
+
+    private void playCommand(Player player, String name) {
+        player.sendMessage(cc + "Loading " + name);
+        World world = lvlman.clone(lvlman.getWorld(name));
+        player.teleport(world.getSpawnLocation());
     }
 
     private void editCommand(Player player, String name) {

@@ -8,3 +8,5 @@ TODO:
 > stop creeper explosions
 > stop time
 > add /setstart
+> add nameLegit()
+> delete world on exit
