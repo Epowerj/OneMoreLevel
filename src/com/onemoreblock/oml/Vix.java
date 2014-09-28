@@ -64,7 +64,7 @@ public class Vix extends JavaPlugin {
                 }
 
                 if (cmd.getName().equalsIgnoreCase("play")) {
-                    editCommand(player, args[0]);
+                    playCommand(player, args[0]);
                     return true;
                 }
             } else {
