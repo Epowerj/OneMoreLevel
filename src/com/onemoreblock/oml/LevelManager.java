@@ -17,17 +17,23 @@ public class LevelManager {
     public World create(String name, Player creator) {
         //TODO check if exists
         if (!levelExists(name)) {
-            WorldCreator wc = new WorldCreator(name);
-            wc.generator("VoidGenerator");
-            wc.generateStructures(false);
-            wc.environment(org.bukkit.World.Environment.NORMAL);
             Vix.getDB().register(name, creator.getDisplayName());
-            World world = wc.createWorld();
+            World world = createWorld(name);
             makeBlock(world);
             return world;
         } else {
             return null;
         }
+    }
+
+    private World createWorld(String name) {
+        WorldCreator wc = new WorldCreator(name);
+        wc.generator("VoidGenerator");
+        wc.generateStructures(false);
+        wc.environment(org.bukkit.World.Environment.NORMAL);
+        World world = wc.createWorld();
+        makeBlock(world);
+        return world;
     }
 
     public World clone(World world) {
@@ -40,7 +46,7 @@ public class LevelManager {
 
         levels.put(world.getName(), cloneNum);
         String worldname = (world.getName() + "@" + levels.get(world.getName()));
-        copyWorld(world.getWorldFolder(), Bukkit.getWorld(worldname).getWorldFolder());
+        copyWorld(world.getWorldFolder(), createWorld(worldname).getWorldFolder());
         return getWorld(worldname);
     }
 
