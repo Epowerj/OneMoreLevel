@@ -10,3 +10,4 @@ TODO:
 > add /setstart
 > add nameLegit()
 > delete world on exit
+> REMAKE copyWorld()!

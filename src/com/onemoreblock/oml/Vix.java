@@ -77,14 +77,18 @@ public class Vix extends JavaPlugin {
     }
 
     private void createCommand(Player player, String name) {
-        player.sendMessage("Creating " + name);
-        World world = lvlman.create(name, player);
-        if (world != null) {
-            player.teleport(world.getSpawnLocation());
-            permission.playerAdd(player, perms);
-            player.setGameMode(GameMode.CREATIVE);
+        if (worldNameLegit(name)) {
+            player.sendMessage("Creating " + name);
+            World world = lvlman.create(name, player);
+            if (world != null) {
+                player.teleport(world.getSpawnLocation());
+                permission.playerAdd(player, perms);
+                player.setGameMode(GameMode.CREATIVE);
+            } else {
+                player.sendMessage(cc + "The world " + name + " already exists!");
+            }
         } else {
-            player.sendMessage(cc + "The world " + name + " already exists!");
+            player.sendMessage(cc + "The world name cannot contain '@'");
         }
     }
 
@@ -114,6 +118,10 @@ public class Vix extends JavaPlugin {
             lvlman.unloadWorld(player.getWorld());
         }
         player.teleport(Bukkit.getWorld("world").getSpawnLocation());
+    }
+
+    public boolean worldNameLegit(String name) {
+        return !name.contains("@");
     }
 
     public boolean isPlayerEditing(Player player) {

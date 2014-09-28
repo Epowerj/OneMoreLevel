@@ -46,7 +46,7 @@ public class LevelManager {
 
         levels.put(world.getName(), cloneNum);
         String worldname = (world.getName() + "@" + levels.get(world.getName()));
-        copyWorld(world.getWorldFolder(), createWorld(worldname).getWorldFolder());
+        copyWorld(world.getWorldFolder(), Bukkit.getWorld(worldname).getWorldFolder());
         return getWorld(worldname);
     }
 
