@@ -3,16 +3,10 @@ package com.onemoreblock.oml;
 import org.bukkit.*;
 import org.bukkit.entity.Player;
 
-import java.io.*;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-
 /**
  * Created by epowerj on 9/8/14.
  */
 public class LevelManager {
-    HashMap<String, Integer> levels = new HashMap<String, Integer>();
 
     public World create(String name, Player creator) {
         //TODO check if exists
@@ -36,47 +30,15 @@ public class LevelManager {
         return world;
     }
 
-    public World clone(World world) {
-        int cloneNum;
-        if (levels.containsValue(world.getName())) {
-            cloneNum = levels.get(world.getName()) + 1;
-        } else {
-            cloneNum = 1;
-        }
-
-        levels.put(world.getName(), cloneNum);
-        String worldname = (world.getName() + "@" + levels.get(world.getName()));
-        copyWorld(world.getWorldFolder(), Bukkit.getWorld(worldname).getWorldFolder());
-        return getWorld(worldname);
+    public World clone(World world, Player player) {
+        String worldname = (world.getName() + "@" + player.getName());
+        return copyWorld(world, worldname);
     }
 
-    private void copyWorld(File source, File target) {
-        try {
-            ArrayList<String> ignore = new ArrayList<String>(Arrays.asList("uid.dat", "session.dat"));
-            if (!ignore.contains(source.getName())) {
-                if (source.isDirectory()) {
-                    if (!target.exists())
-                        target.mkdirs();
-                    String files[] = source.list();
-                    for (String file : files) {
-                        File srcFile = new File(source, file);
-                        File destFile = new File(target, file);
-                        copyWorld(srcFile, destFile);
-                    }
-                } else {
-                    InputStream in = new FileInputStream(source);
-                    OutputStream out = new FileOutputStream(target);
-                    byte[] buffer = new byte[1024];
-                    int length;
-                    while ((length = in.read(buffer)) > 0)
-                        out.write(buffer, 0, length);
-                    in.close();
-                    out.close();
-                }
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    private World copyWorld(World source, String copyWorld) {
+        WorldCreator wc = new WorldCreator(copyWorld);
+        wc.copy(source);
+        return wc.createWorld();
     }
 
 
@@ -87,6 +49,10 @@ public class LevelManager {
         } else {
             return world;
         }
+    }
+
+    public void deleteWorld(World world) {
+        world.getWorldFolder().delete();
     }
 
     public void unloadWorld(World world) {

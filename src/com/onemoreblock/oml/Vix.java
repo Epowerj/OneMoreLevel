@@ -94,7 +94,7 @@ public class Vix extends JavaPlugin {
 
     private void playCommand(Player player, String name) {
         player.sendMessage(cc + "Loading " + name);
-        World world = lvlman.clone(lvlman.getWorld(name));
+        World world = lvlman.clone(lvlman.getWorld(name), player);
         player.teleport(world.getSpawnLocation());
     }
 
@@ -114,13 +114,17 @@ public class Vix extends JavaPlugin {
         permission.playerRemove(player, perms);
         player.getInventory().clear();
         player.setGameMode(GameMode.ADVENTURE);
-        if (player.getWorld().getName() != "world") {
-            lvlman.unloadWorld(player.getWorld());
-        }
+        World world = player.getWorld();
         player.teleport(Bukkit.getWorld("world").getSpawnLocation());
+        if (world.getName() != "world") {
+            lvlman.unloadWorld(world);
+        }
+        if (!worldNameLegit(world.getName())) {
+            lvlman.deleteWorld(world);
+        }
     }
 
-    public boolean worldNameLegit(String name) {
+    public static boolean worldNameLegit(String name) {
         return !name.contains("@");
     }
 
