@@ -3,6 +3,8 @@ package com.onemoreblock.oml;
 import org.bukkit.*;
 import org.bukkit.entity.Player;
 
+import java.io.File;
+
 /**
  * Created by epowerj on 9/8/14.
  */
@@ -51,12 +53,20 @@ public class LevelManager {
         }
     }
 
-    public void deleteWorld(World world) {
-        world.getWorldFolder().delete();
+    public void deleteWorld(World world, Player player) {
+        if (player.getWorld().getName() != "world") {
+            player.teleport(getWorld("world").getSpawnLocation());
+        }
+        File worldfolder = world.getWorldFolder();
+        unloadWorld(world);
+        worldfolder.delete();
     }
 
     public void unloadWorld(World world) {
-        Bukkit.getServer().unloadWorld(world, true);
+        world = Bukkit.getWorld("");
+        if (!world.equals(null)) {
+            Bukkit.getServer().unloadWorld(world, true);
+        }
     }
 
     private void makeBlock(World world) {
