@@ -54,12 +54,25 @@ public class LevelManager {
     }
 
     public void deleteWorld(World world, Player player) {
-        if (player.getWorld().getName() != "world") {
+        if (!player.getWorld().getName().equals("world")) {
             player.teleport(getWorld("world").getSpawnLocation());
         }
         File worldfolder = world.getWorldFolder();
-        unloadWorld(world);
-        worldfolder.delete();
+        deleteWorld(worldfolder);
+    }
+
+    public boolean deleteWorld(File path) {
+        if (path.exists()) {
+            File files[] = path.listFiles();
+            for (int i = 0; i < files.length; i++) {
+                if (files[i].isDirectory()) {
+                    deleteWorld(files[i]);
+                } else {
+                    files[i].delete();
+                }
+            }
+        }
+        return (path.delete());
     }
 
     public void unloadWorld(World world) {

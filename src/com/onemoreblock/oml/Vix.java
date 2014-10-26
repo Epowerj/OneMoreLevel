@@ -63,6 +63,11 @@ public class Vix extends JavaPlugin {
                     return true;
                 }
 
+                if (cmd.getName().equalsIgnoreCase("delete")) {
+                    lvlman.deleteWorld(lvlman.getWorld(args[0]), player);
+                    return true;
+                }
+
                 if (cmd.getName().equalsIgnoreCase("play")) {
                     playCommand(player, args[0]);
                     return true;
@@ -120,7 +125,7 @@ public class Vix extends JavaPlugin {
             lvlman.unloadWorld(world);
         }
         if (!worldNameLegit(world.getName())) {
-            lvlman.deleteWorld(world);
+            lvlman.deleteWorld(world, player);
         }
     }
 
