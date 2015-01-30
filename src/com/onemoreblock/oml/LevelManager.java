@@ -102,7 +102,7 @@ public class LevelManager {
 
     public void unloadWorld(World world) {
         world = Bukkit.getWorld("");
-        if (!world.equals(null)) {
+        if (world != null) {
             Bukkit.getServer().unloadWorld(world, true);
         }
     }
