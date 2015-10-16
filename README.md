@@ -1,6 +1,7 @@
 OneMoreLevel
 ============
 Custom Minecraft server that allows you to create and share your levels.
+CURENTLY ABANDONED
 
 TODO:
 
@@ -12,3 +13,4 @@ add /setstart
 add nameLegit()
 delete world on exit
 REMAKE copyWorld()!
+
